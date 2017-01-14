@@ -1,1 +1,0 @@
-java -classpath "Sokoban.zip" run.Main
