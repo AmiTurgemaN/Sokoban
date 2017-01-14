@@ -82,7 +82,7 @@ public class CommandCreator implements Serializable{
 	
 	public void serializeHash() throws FileNotFoundException, IOException
 	{
-			ObjectOutputStream saveOut = new ObjectOutputStream(new FileOutputStream("commandHashMap.obj"));
+			ObjectOutputStream saveOut = new ObjectOutputStream(new FileOutputStream("Hash Maps/commandHashMap.obj"));
 			saveOut.writeObject(this.commandsHashMap);
 			saveOut.close();
             System.out.println("Serialized HashMap data has been is saved");

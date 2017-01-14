@@ -97,8 +97,8 @@ public class LevelCreator implements Serializable
 	
 	public void serializeHash() throws FileNotFoundException, IOException
 	{
-			ObjectOutputStream saveOut = new ObjectOutputStream(new FileOutputStream("saveHashMap.obj"));
-			ObjectOutputStream loadOut = new ObjectOutputStream(new FileOutputStream("loadHashMap.obj"));
+			ObjectOutputStream saveOut = new ObjectOutputStream(new FileOutputStream("Hash Maps/saveHashMap.obj"));
+			ObjectOutputStream loadOut = new ObjectOutputStream(new FileOutputStream("Hash Maps/loadHashMap.obj"));
 			saveOut.writeObject(this.saveHashMap);
 			saveOut.close();
 			loadOut.writeObject(this.loadHashMap);

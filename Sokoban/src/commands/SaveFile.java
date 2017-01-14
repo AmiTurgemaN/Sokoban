@@ -78,7 +78,7 @@ public class SaveFile extends GeneralCommand {
 	public void doCommand(String arg) {
 		try {
 			String extension = util.Utilities.getExtension(arg);
-			this.lc = new LevelCreator(new FileInputStream("saveHashMap.obj"),new FileInputStream("loadHashMap.obj"));
+			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
 			GeneralLevelSaverCreator glsc = this.lc.getSaveHashMap().get(extension);
 			if(!arg.contains("."))
 			{
@@ -90,7 +90,7 @@ public class SaveFile extends GeneralCommand {
 				System.out.println(extension+" extension is not supported.");
 				return;
 			}
-			this.outputStream=new FileOutputStream(new File(arg));
+			this.outputStream=new FileOutputStream(new File("Level Files/"+arg));
 			this.generalLevelSaver = glsc.create(level);
 			this.level.setLevelName(arg.replaceAll("."+extension, ""));
 			execute();

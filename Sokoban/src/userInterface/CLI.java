@@ -24,7 +24,7 @@ public class CLI {
 		this.in = in;
 		this.out = out;
 		this.level = null;
-		this.commandHashMap = new CommandCreator(new FileInputStream("commandHashMap.obj")).getCommandsHashMap();
+		this.commandHashMap = new CommandCreator(new FileInputStream("Hash Maps/commandHashMap.obj")).getCommandsHashMap();
 	}
 
 	public void start()

@@ -87,7 +87,7 @@ public class LoadFile extends GeneralCommand {
 	public void doCommand(String arg) {
 		try {
 			this.fileName=arg;
-			this.lc = new LevelCreator(new FileInputStream("saveHashMap.obj"),new FileInputStream("loadHashMap.obj"));
+			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
 			GeneralLevelLoaderCreator gllc = this.lc.getLoadHashMap().get(util.Utilities.getExtension(fileName));
 			if(!arg.contains("."))
 			{
@@ -99,7 +99,7 @@ public class LoadFile extends GeneralCommand {
 				System.out.println(util.Utilities.getExtension(arg)+" extension is not supported.");
 				return;
 			}
-			this.inputStream = new FileInputStream (arg);
+			this.inputStream = new FileInputStream ("Level Files/"+arg);
 			this.generalLevelLoader = gllc.create();
 			execute();
 		} catch (FileNotFoundException | ClassNotFoundException e) {
