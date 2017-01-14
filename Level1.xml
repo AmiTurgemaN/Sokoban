@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_101" class="java.beans.XMLDecoder">
+ <object class="level.Level">
+  <void property="areaPlayers">
+   <null/>
+  </void>
+  <void property="areas">
+   <null/>
+  </void>
+  <void property="boxedAreas">
+   <null/>
+  </void>
+  <void property="boxes">
+   <null/>
+  </void>
+  <void property="levelName">
+   <string>Level 1</string>
+  </void>
+  <void property="levelString">
+   <string>####&#13;
+# o#&#13;
+#  ###&#13;
+#$A  #&#13;
+#  @ #&#13;
+#  ###&#13;
+####</string>
+  </void>
+  <void property="players">
+   <null/>
+  </void>
+  <void property="spaces">
+   <null/>
+  </void>
+  <void property="walls">
+   <null/>
+  </void>
+ </object>
+</java>
