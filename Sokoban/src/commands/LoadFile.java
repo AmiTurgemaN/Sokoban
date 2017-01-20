@@ -66,6 +66,30 @@ public class LoadFile extends GeneralCommand {
 
 	@Override
 	public void execute() {
+		try {
+			this.fileName=this.commandArgs;
+			if(this.commandArgs==null)
+			{
+				System.out.println("Error: Invalid level file name.");
+				return;
+			}
+			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
+			GeneralLevelLoaderCreator gllc = this.lc.getLoadHashMap().get(util.Utilities.getExtension(fileName));
+			if(!this.commandArgs.contains("."))
+			{
+				System.out.println("Error: File extension is needed.");
+				return;
+			}
+			else if(gllc==null)
+			{
+				System.out.println("Error: "+util.Utilities.getExtension(this.commandArgs)+" extension is not supported.");
+				return;
+			}
+			this.inputStream = new FileInputStream ("Level Files/"+this.commandArgs);
+			this.generalLevelLoader = gllc.create();
+		} catch (FileNotFoundException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		LoadLevelReciever llr = new LoadLevelReciever(generalLevelLoader, inputStream);
 		llr.action();
 		setLevel(llr.getLevel());
@@ -81,29 +105,5 @@ public class LoadFile extends GeneralCommand {
 		level.init2DLevel();
 		if(this.level.getLevelString()!="")
 			System.out.println("Level "+level.getLevelName()+" has been loaded from "+util.Utilities.getExtension(fileName)+" file");
-	}
-
-	@Override
-	public void doCommand(String arg) {
-		try {
-			this.fileName=arg;
-			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
-			GeneralLevelLoaderCreator gllc = this.lc.getLoadHashMap().get(util.Utilities.getExtension(fileName));
-			if(!arg.contains("."))
-			{
-				System.out.println("file extension is needed.");
-				return;
-			}
-			else if(gllc==null)
-			{
-				System.out.println(util.Utilities.getExtension(arg)+" extension is not supported.");
-				return;
-			}
-			this.inputStream = new FileInputStream ("Level Files/"+arg);
-			this.generalLevelLoader = gllc.create();
-			execute();
-		} catch (FileNotFoundException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
 	}
 }

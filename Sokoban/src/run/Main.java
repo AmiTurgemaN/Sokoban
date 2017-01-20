@@ -1,12 +1,11 @@
 package run;
 
-import userInterface.CLI;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import view.CLI;
 
 public class Main {
 
@@ -16,7 +15,7 @@ public class Main {
 		PrintWriter writer = new PrintWriter(System.out);
 		CLI cli;
 		try {
-			cli = new CLI(reader, writer);
+			cli = new CLI(reader, writer,"exit");
 			cli.start();
 		} catch (ClassNotFoundException | FileNotFoundException e) {
 			e.printStackTrace();

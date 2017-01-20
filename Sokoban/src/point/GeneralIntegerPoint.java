@@ -6,7 +6,7 @@ import commands.Direction;
 
 public abstract class GeneralIntegerPoint implements Serializable,Comparable<GeneralIntegerPoint>{
 
-	private static final long serialVersionUID = -3615622134611243390L;
+	private static final long serialVersionUID = 1L;
 	
 	protected int x;
 	protected int y;

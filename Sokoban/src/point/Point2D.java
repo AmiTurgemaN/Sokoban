@@ -4,7 +4,7 @@ import commands.Direction;
 
 public class Point2D extends GeneralIntegerPoint{
 
-	private static final long serialVersionUID = -3615622134611243390L;
+	private static final long serialVersionUID = 1L;
 
 	public Point2D(int x,int y)
 	{

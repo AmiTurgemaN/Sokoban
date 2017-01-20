@@ -6,7 +6,7 @@ import point.*;
 
 public abstract class GeneralGameObject implements Serializable, gameObject {
 
-	private static final long serialVersionUID = -3615622134611243390L;
+	private static final long serialVersionUID = 1L;
 	protected GeneralIntegerPoint point;
 	
 	public GeneralIntegerPoint getPoint() {

@@ -29,7 +29,6 @@ public class ExitReciever extends GeneralReciever {
 			}
 			System.out.print(dotsString.charAt(0));
 		}
-		System.exit(0);
 	}
 
 }

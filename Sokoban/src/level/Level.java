@@ -17,7 +17,7 @@ import policy.GeneralSokobanPolicy;
 
 public class Level implements Serializable{
 
-	private static final long serialVersionUID = -3615622134611243390L;
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Wall> walls;
 	private ArrayList<Box> boxes;
 	private ArrayList<Area> areas;

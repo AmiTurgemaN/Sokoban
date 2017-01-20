@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class LevelCreator implements Serializable
 {
-	protected static final long serialVersionUID = -3615622134611243390L;
+	protected static final long serialVersionUID = 1L;
 	private HashMap<String, GeneralLevelSaverCreator> saveHashMap;
 	private HashMap<String, GeneralLevelLoaderCreator> loadHashMap;
 	
@@ -46,19 +46,19 @@ public class LevelCreator implements Serializable
 	}
 
 	private class txtLoaderCreator extends GeneralLevelLoaderCreator implements Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralLevelLoader create() {
 			return new MyTextLevelLoader();
 		}
 	}
 	private class xmlLoaderCreator extends GeneralLevelLoaderCreator implements Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralLevelLoader create() {
 			return new MyXMLLevelLoader();
 		}
 	}
 	private class objLoaderCreator extends GeneralLevelLoaderCreator implements Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralLevelLoader create() {
 			return new MyObjectLevelLoader();
 		}
@@ -66,19 +66,19 @@ public class LevelCreator implements Serializable
 	}
 
 	private class txtSaverCreator extends GeneralLevelSaverCreator implements Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralLevelSaver create(Level level) {
 			return new MyTextLevelSaver(level);
 		}
 	}
 	private class xmlSaverCreator extends GeneralLevelSaverCreator implements Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralLevelSaver create(Level level) {
 			return new MyXMLLevelSaver(level);
 		}
 	}
 	private class objSaverCreator extends GeneralLevelSaverCreator implements Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralLevelSaver create(Level level) {
 			return new MyObjectLevelSaver(level);
 		}

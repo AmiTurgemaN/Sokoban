@@ -4,7 +4,7 @@ import point.GeneralIntegerPoint;
 
 public class Player extends GeneralGameObject {
 
-	private static final long serialVersionUID = -3615622134611243390L;
+	private static final long serialVersionUID = 1L;
 	
 	public Player()
 	{

@@ -19,21 +19,17 @@ public class Display extends GeneralCommand {
 
 	@Override
 	public void execute() {
+		if(this.commandArgs!=null)
+		{
+			System.out.println("Error: Display command does not require any arguments.");
+			return;
+		}
+		if(this.level==null)
+		{
+			System.out.println("Error: Level not loaded");
+			return;
+		}
 		DisplayReciever dr = new DisplayReciever(level);
 		dr.action();
 	}
-
-	@Override
-	public void doCommand(String arg) {
-		if(arg!=null)
-		{
-			System.out.println("Invalid command");
-			return;
-		}
-		if(this.level!=null)
-			execute();
-		else
-			System.out.println("Level not loaded");
-	}
-
 }

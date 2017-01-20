@@ -14,18 +14,13 @@ public class Exit extends GeneralCommand {
 	
 	@Override
 	public void execute() {
-		ExitReciever er = new ExitReciever(exitString);
-		er.action();
-	}
-
-	@Override
-	public void doCommand(String arg) {
-		if(arg!=null)
+		if(this.commandArgs!=null)
 		{
-			System.out.println("Invalid command");
+			System.out.println("Error: Exit command does not require any arguments.");
 			return;
 		}
 		this.exitString="Exiting";
-		execute();
+		ExitReciever er = new ExitReciever(exitString);
+		er.action();
 	}
 }

@@ -50,7 +50,7 @@ public class MoveReciever extends GeneralReciever {
 		if(checkMove(sourceObject,destObject,boxNewDestObject) == true)
 			level.updateLevel(sourceObject,destObject,boxNewDestObject);
 		else
-			System.out.println("Cannot move "+this.direction.toString());
+			System.out.println("Error: Cannot move "+this.direction.toString());
 	}
 
 	public Direction getDirection() {

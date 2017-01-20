@@ -36,21 +36,12 @@ public class Move extends GeneralCommand {
 
 	@Override
 	public void execute() {
-		if(!this.level.isCompleted())
+		if(this.commandArgs==null)
 		{
-			MoveReciever cm = new MoveReciever(direction, level,level.getPlayerLocation());
-			cm.action();
-		}
-	}
-
-	@Override
-	public void doCommand(String arg) {
-		if(arg==null)
-		{
-			System.out.println("Invalid move command");
+			System.out.println("Error: Invalid move command");
 			return;
 		}
-		switch (arg) {
+		switch (this.commandArgs) {
 		case "up":
 			this.direction=Direction.UP;
 			break;
@@ -64,15 +55,19 @@ public class Move extends GeneralCommand {
 			this.direction=Direction.RIGHT;
 			break;
 		default:
-			System.out.println("Invalid move command");
+			System.out.println("Error: Invalid move command");
 			return;
 		}
 		if(this.level==null)
 		{
-			System.out.println("Level not loaded");
+			System.out.println("Error: Level not loaded");
 			return;
 		}
-		else
-			execute();
+		if(!this.level.isCompleted())
+		{
+			MoveReciever cm = new MoveReciever(direction, level,level.getPlayerLocation());
+			cm.action();
+		}
 	}
+
 }

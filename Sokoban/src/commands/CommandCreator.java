@@ -14,7 +14,7 @@ import level.Level;
 
 public class CommandCreator implements Serializable{
 
-	protected static final long serialVersionUID = -3615622134611243390L;
+	private static final long serialVersionUID = 1L;
 	private HashMap<String,GeneralCommandCreator> commandsHashMap;
 	
 	public CommandCreator(FileInputStream fileInputStream) {
@@ -39,33 +39,33 @@ public class CommandCreator implements Serializable{
 	}
 	
 	private class displayCommandCreator  implements GeneralCommandCreator,Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralCommand create(Level level) {
 			return new Display(level);
 		}
 	}
 	private class exitCommandCreator  implements GeneralCommandCreator,Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		private static final long serialVersionUID = 1L;
 		public GeneralCommand create(Level level) {
 			return new Exit(level);
 		}
 	}
 	private class loadCommandCreator  implements GeneralCommandCreator,Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralCommand create(Level level) {
 			return new LoadFile(level);
 		}
 	}
 	
 	private class saveCommandCreator  implements GeneralCommandCreator,Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralCommand create(Level level) {
 			return new SaveFile(level);
 		}
 	}
 	
 	private class moveCommandCreator  implements GeneralCommandCreator,Serializable{
-		protected static final long serialVersionUID = -3615622134611243390L;
+		protected static final long serialVersionUID = 1L;
 		public GeneralCommand create(Level level) {
 			return new Move(level);
 		}

@@ -70,30 +70,25 @@ public class SaveFile extends GeneralCommand {
 
 	@Override
 	public void execute() {
-		SaveLevelReciever slr = new SaveLevelReciever(generalLevelSaver,outputStream);
-		slr.action();
-	}
-
-	@Override
-	public void doCommand(String arg) {
 		try {
-			String extension = util.Utilities.getExtension(arg);
+			String extension = util.Utilities.getExtension(this.commandArgs);
 			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
 			GeneralLevelSaverCreator glsc = this.lc.getSaveHashMap().get(extension);
-			if(!arg.contains("."))
+			if(!this.commandArgs.contains("."))
 			{
-				System.out.println("file extension is needed.");
+				System.out.println("Error: File extension is needed.");
 				return;
 			}
 			else if(glsc==null)
 			{
-				System.out.println(extension+" extension is not supported.");
+				System.out.println("Error: "+extension+" extension is not supported.");
 				return;
 			}
-			this.outputStream=new FileOutputStream(new File("Level Files/"+arg));
+			this.outputStream=new FileOutputStream(new File("Level Files/"+this.commandArgs));
 			this.generalLevelSaver = glsc.create(level);
-			this.level.setLevelName(arg.replaceAll("."+extension, ""));
-			execute();
+			this.level.setLevelName(this.commandArgs.replaceAll("."+extension, ""));
+			SaveLevelReciever slr = new SaveLevelReciever(generalLevelSaver,outputStream);
+			slr.action();
 			System.out.println("Level "+level.getLevelName()+" has been saved as "+extension+" file");
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
