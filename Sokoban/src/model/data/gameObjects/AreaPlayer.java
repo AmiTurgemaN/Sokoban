@@ -1,29 +1,29 @@
-package gameObjects;
+package model.data.gameObjects;
 
 import model.data.point.GeneralIntegerPoint;
 
-public class BoxedArea extends GeneralGameObject {
+public class AreaPlayer extends GeneralGameObject {
 
 	private static final long serialVersionUID = 1L;
 	
-	public BoxedArea()
+	public AreaPlayer()
 	{
 		super();
 	}
 	
-	public BoxedArea(GeneralIntegerPoint point)
+	public AreaPlayer(GeneralIntegerPoint point)
 	{
 		super(point);
 	}
 
 	@Override
 	public objectType getType() {
-		return objectType.BOXEDAREA;
+		return objectType.AREAPLAYER;
 	}
 	
 	@Override
 	public char getSymbol() {
-		return '$';
+		return 'B';
 	}
 
 }

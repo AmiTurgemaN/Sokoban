@@ -1,4 +1,4 @@
-package gameObjects;
+package model.data.gameObjects;
 
 public interface gameObject {
 	public objectType getType();

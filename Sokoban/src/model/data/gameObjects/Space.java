@@ -1,29 +1,28 @@
-package gameObjects;
+package model.data.gameObjects;
 
 import model.data.point.GeneralIntegerPoint;
 
-public class Area extends GeneralGameObject {
+public class Space extends GeneralGameObject {
 
 	private static final long serialVersionUID = 1L;
 	
-	public Area()
+	public Space()
 	{
 		super();
 	}
 	
-	public Area(GeneralIntegerPoint point)
+	public Space(GeneralIntegerPoint point)
 	{
 		super(point);
 	}
 
 	@Override
 	public objectType getType() {
-		return objectType.AREA;
+		return objectType.SPACE;
 	}
 
 	@Override
 	public char getSymbol() {
-		return 'o';
+		return ' ';
 	}
-
 }

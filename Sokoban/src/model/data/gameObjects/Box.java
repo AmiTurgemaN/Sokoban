@@ -1,28 +1,27 @@
-package gameObjects;
+package model.data.gameObjects;
 
 import model.data.point.GeneralIntegerPoint;
 
-public class Wall extends GeneralGameObject {
+public class Box extends GeneralGameObject {
 
 	private static final long serialVersionUID = 1L;
 	
-	public Wall()
+	public Box()
 	{
 		super();
 	}
 	
-	public Wall(GeneralIntegerPoint point)
+	public Box(GeneralIntegerPoint point)
 	{
 		super(point);
 	}
 
 	@Override
 	public objectType getType() {
-		return objectType.WALL;
+		return objectType.BOX;
 	}
 	
-	@Override
 	public char getSymbol() {
-		return '#';
+		return '@';
 	}
 }

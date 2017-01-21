@@ -1,29 +1,28 @@
-package gameObjects;
+package model.data.gameObjects;
 
 import model.data.point.GeneralIntegerPoint;
 
-public class AreaPlayer extends GeneralGameObject {
+public class Wall extends GeneralGameObject {
 
 	private static final long serialVersionUID = 1L;
 	
-	public AreaPlayer()
+	public Wall()
 	{
 		super();
 	}
 	
-	public AreaPlayer(GeneralIntegerPoint point)
+	public Wall(GeneralIntegerPoint point)
 	{
 		super(point);
 	}
 
 	@Override
 	public objectType getType() {
-		return objectType.AREAPLAYER;
+		return objectType.WALL;
 	}
 	
 	@Override
 	public char getSymbol() {
-		return 'B';
+		return '#';
 	}
-
 }

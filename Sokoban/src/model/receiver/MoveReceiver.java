@@ -1,8 +1,8 @@
 package model.receiver;
 
 import controller.commands.Direction;
-import gameObjects.GeneralGameObject;
 import model.Model;
+import model.data.gameObjects.GeneralGameObject;
 import model.data.point.GeneralIntegerPoint;
 
 public class MoveReceiver extends GeneralReceiver {
