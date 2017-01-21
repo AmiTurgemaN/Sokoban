@@ -1,25 +1,28 @@
 package run;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+import controller.SokobanController;
+import model.SokobanModel;
 import view.CLI;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
+		SokobanModel model = new SokobanModel();
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		PrintWriter writer = new PrintWriter(System.out);
-		CLI cli;
-		try {
-			cli = new CLI(reader, writer,"exit");
-			cli.start();
-		} catch (ClassNotFoundException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		CLI view = new CLI(reader, writer, "exit");
+		
+		SokobanController controller = new SokobanController(model, view);
+		model.addObserver(controller);
+		view.addObserver(controller);
+		
+		view.start();
 	}
 
 }

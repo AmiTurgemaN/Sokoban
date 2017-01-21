@@ -1,6 +1,6 @@
 package point;
 
-import commands.Direction;
+import controller.commands.Direction;
 
 public class Point2D extends GeneralIntegerPoint{
 

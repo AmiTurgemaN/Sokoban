@@ -1,84 +1,92 @@
 package view;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Observable;
-import java.util.Scanner;
 
-import commands.CommandCreator;
-import commands.GeneralCommand;
-import commands.GeneralCommandCreator;
 import level.Level;
-import policy.MySokobanPolicy;
+import model.receiver.DisplayReceiver;
 
-public class CLI extends Observable implements View{
+public class CLI extends Observable implements View,Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private BufferedReader in;
 	private PrintWriter out;
-	private Level level;
-	private HashMap<String,GeneralCommandCreator> commandHashMap;
 	private String exitString;
-
-	public CLI(BufferedReader in, PrintWriter out,String exitString) throws ClassNotFoundException, FileNotFoundException
+	
+	public CLI()
 	{
+		
+	}
+	public BufferedReader getIn() {
+		return in;
+	}
+
+	public void setIn(BufferedReader in) {
 		this.in = in;
+	}
+
+	public PrintWriter getOut() {
+		return out;
+	}
+
+	public void setOut(PrintWriter out) {
 		this.out = out;
-		this.level = null;
-		this.commandHashMap = new CommandCreator(new FileInputStream("Hash Maps/commandHashMap.obj")).getCommandsHashMap();
+	}
+
+	public String getExitString() {
+		return exitString;
+	}
+
+	public void setExitString(String exitString) {
 		this.exitString = exitString;
 	}
 
-	public void start()
+	public CLI(BufferedReader in, PrintWriter out,String exitString)
 	{
-		soloGame();
+		this.in = in;
+		this.out = out;
+		this.exitString = exitString;
 	}
 
-	private void soloGame() {
-		Thread thread = new Thread(new Runnable() {
+	@Override
+	public void start() {
+		new Thread(new Runnable() {
+
 			@Override
 			public void run() {
-				@SuppressWarnings("resource")
-				Scanner scanner = new Scanner(in);
-				GeneralCommand command = null;
-				String line="";
-				while (!line.equals(exitString))
-				{	
-					line = scanner.nextLine();
-					String[] sp = line.split(" ");
-
-					String commandName = sp[0].toLowerCase();
-					String arg = null;
-					if (sp.length == 2)
-						arg = sp[1].toLowerCase();
-					if(sp.length>2)
-					{
-						displayError("Invalid command");
-						line = scanner.nextLine();
-						continue;
+				String commandLine = "";
+				do {
+					try {
+						commandLine = in.readLine();
+						setChanged();
+						notifyObservers(commandLine);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					GeneralCommandCreator gcc = commandHashMap.get(commandName);
-					if(gcc!=null)
-					{
-						command = gcc.create(level);
-						command.setCommandArgs(arg);
-						command.execute();
-						level=command.getLevel();
-						if(level!=null)
-							level.setPolicy(new MySokobanPolicy());
-					}
-					else
-						displayError("Invalid command");
-				}
+				} while (!commandLine.equals(exitString));				
 			}
-		});
-		thread.start();
-	}	
+		}).start();	
+	}
 
 	@Override
 	public void displayError(String msg) {
 		out.println("Error: " + msg);
+		out.flush();
+	}
+
+	@Override
+	public void displayLevel(Level level) {
+		DisplayReceiver dr = new DisplayReceiver(level);
+		dr.action();
+	}
+
+	@Override
+	public void displayMessage(String msg) {
+		out.println(msg);
 		out.flush();
 	}
 }

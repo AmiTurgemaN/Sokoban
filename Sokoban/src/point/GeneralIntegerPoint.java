@@ -2,7 +2,7 @@ package point;
 
 import java.io.Serializable;
 
-import commands.Direction;
+import controller.commands.Direction;
 
 public abstract class GeneralIntegerPoint implements Serializable,Comparable<GeneralIntegerPoint>{
 
