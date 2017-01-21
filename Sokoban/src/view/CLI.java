@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Observable;
 
-import level.Level;
+import model.data.level.Level;
 import model.receiver.DisplayReceiver;
 
 public class CLI extends Observable implements View,Serializable{

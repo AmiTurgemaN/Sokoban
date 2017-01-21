@@ -4,11 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import level.GeneralLevelLoader;
-import level.GeneralLevelLoaderCreator;
-import level.LevelCreator;
+import model.data.level.GeneralLevelLoader;
+import model.data.level.GeneralLevelLoaderCreator;
+import model.data.level.LevelCreator;
+import model.data.util.Utilities;
+import model.policy.MySokobanPolicy;
 import model.Model;
-import policy.MySokobanPolicy;
 import view.View;
 
 public class LoadFile extends GeneralCommand {
@@ -85,7 +86,7 @@ public class LoadFile extends GeneralCommand {
 				return;
 			}
 			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
-			GeneralLevelLoaderCreator gllc = this.lc.getLoadHashMap().get(util.Utilities.getExtension(fileName));
+			GeneralLevelLoaderCreator gllc = this.lc.getLoadHashMap().get(Utilities.getExtension(fileName));
 			if(!this.commandArgs.contains("."))
 			{
 				view.displayError("File extension is needed.");
@@ -93,7 +94,7 @@ public class LoadFile extends GeneralCommand {
 			}
 			else if(gllc==null)
 			{
-				view.displayError(util.Utilities.getExtension(this.commandArgs)+" extension is not supported.");
+				view.displayError(Utilities.getExtension(this.commandArgs)+" extension is not supported.");
 				return;
 			}
 			this.inputStream = new FileInputStream ("Level Files/"+this.commandArgs);
@@ -109,9 +110,9 @@ public class LoadFile extends GeneralCommand {
 	public void setLevel() {
 		this.model.getLevel().setPolicy(new MySokobanPolicy());
 		model.setLevel(this.model.getLevel());
-		this.model.getLevel().setLevelName(fileName.replaceAll("."+util.Utilities.getExtension(fileName), ""));
+		this.model.getLevel().setLevelName(fileName.replaceAll("."+Utilities.getExtension(fileName), ""));
 		this.model.getLevel().init2DLevel();
 		if(this.model.getLevel().getLevelString()!="")
-			view.displayMessage("Level "+model.getLevel().getLevelName()+" has been loaded from "+util.Utilities.getExtension(fileName)+" file");
+			view.displayMessage("Level "+model.getLevel().getLevelName()+" has been loaded from "+Utilities.getExtension(fileName)+" file");
 	}
 }

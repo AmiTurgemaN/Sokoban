@@ -3,7 +3,7 @@ package model.receiver;
 import controller.commands.Direction;
 import gameObjects.GeneralGameObject;
 import model.Model;
-import point.GeneralIntegerPoint;
+import model.data.point.GeneralIntegerPoint;
 
 public class MoveReceiver extends GeneralReceiver {
 

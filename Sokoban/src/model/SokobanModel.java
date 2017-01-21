@@ -6,9 +6,9 @@ import java.io.Serializable;
 import java.util.Observable;
 
 import controller.commands.Direction;
-import level.GeneralLevelLoader;
-import level.GeneralLevelSaver;
-import level.Level;
+import model.data.level.GeneralLevelLoader;
+import model.data.level.GeneralLevelSaver;
+import model.data.level.Level;
 import model.receiver.ExitReceiver;
 import model.receiver.LoadLevelReceiver;
 import model.receiver.MoveReceiver;

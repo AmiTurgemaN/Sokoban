@@ -1,6 +1,6 @@
 package gameObjects;
 
-import point.GeneralIntegerPoint;
+import model.data.point.GeneralIntegerPoint;
 
 public class AreaPlayer extends GeneralGameObject {
 

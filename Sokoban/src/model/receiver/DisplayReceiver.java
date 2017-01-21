@@ -1,6 +1,6 @@
 package model.receiver;
 
-import level.Level;
+import model.data.level.Level;
 
 public class DisplayReceiver extends GeneralReceiver {
 

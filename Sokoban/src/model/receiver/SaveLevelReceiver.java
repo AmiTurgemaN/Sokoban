@@ -2,7 +2,7 @@ package model.receiver;
 
 import java.io.OutputStream;
 
-import level.GeneralLevelSaver;
+import model.data.level.GeneralLevelSaver;
 
 public class SaveLevelReceiver extends GeneralReceiver {
 

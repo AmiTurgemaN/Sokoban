@@ -1,6 +1,6 @@
 package controller.commands;
 
-import level.Level;
+import model.data.level.Level;
 import model.Model;
 import view.View;
 

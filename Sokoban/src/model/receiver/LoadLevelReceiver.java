@@ -2,8 +2,8 @@ package model.receiver;
 
 import java.io.InputStream;
 
-import level.GeneralLevelLoader;
-import level.Level;
+import model.data.level.GeneralLevelLoader;
+import model.data.level.Level;
 
 public class LoadLevelReceiver extends GeneralReceiver {
 

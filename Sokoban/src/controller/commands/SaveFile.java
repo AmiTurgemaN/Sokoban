@@ -6,9 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-import level.GeneralLevelSaver;
-import level.GeneralLevelSaverCreator;
-import level.LevelCreator;
+import model.data.level.GeneralLevelSaver;
+import model.data.level.GeneralLevelSaverCreator;
+import model.data.level.LevelCreator;
+import model.data.util.Utilities;
 import model.Model;
 import view.View;
 
@@ -72,7 +73,7 @@ public class SaveFile extends GeneralCommand {
 	@Override
 	public void execute() {
 		try {
-			String extension = util.Utilities.getExtension(this.commandArgs);
+			String extension = Utilities.getExtension(this.commandArgs);
 			this.lc = new LevelCreator(new FileInputStream("Hash Maps/saveHashMap.obj"),new FileInputStream("Hash Maps/loadHashMap.obj"));
 			GeneralLevelSaverCreator glsc = this.lc.getSaveHashMap().get(extension);
 			if(!this.commandArgs.contains("."))

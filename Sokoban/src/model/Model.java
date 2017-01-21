@@ -4,9 +4,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import controller.commands.Direction;
-import level.GeneralLevelLoader;
-import level.GeneralLevelSaver;
-import level.Level;
+import model.data.level.GeneralLevelLoader;
+import model.data.level.GeneralLevelSaver;
+import model.data.level.Level;
 
 public interface Model {
 	Level getLevel();

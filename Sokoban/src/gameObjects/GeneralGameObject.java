@@ -2,7 +2,7 @@ package gameObjects;
 
 import java.io.Serializable;
 
-import point.*;
+import model.data.point.GeneralIntegerPoint;
 
 public abstract class GeneralGameObject implements Serializable, gameObject {
 

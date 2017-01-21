@@ -1,6 +1,6 @@
 package view;
 
-import level.Level;
+import model.data.level.Level;
 
 public interface View{
 	String getExitString();
