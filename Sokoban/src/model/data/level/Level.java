@@ -355,12 +355,10 @@ public class Level implements Serializable{
 		checkLevelCompleted();
 	}
 
-	private boolean checkLevelCompleted() {
+	public boolean checkLevelCompleted() {
 		if(this.areaPlayers.isEmpty() && this.areas.isEmpty() && this.boxes.isEmpty())
 		{
 			this.completed=true;
-			System.out.println(this.levelString);
-			System.out.println("Level completed!");
 			return true;
 		}
 		return false;
@@ -432,7 +430,6 @@ public class Level implements Serializable{
 					initLevel();
 					return;
 				}
-		checkLevelCompleted();
 	}
 
 }

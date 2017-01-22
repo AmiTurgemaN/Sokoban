@@ -1,4 +1,4 @@
-package model.receiver;
+package common;
 
 public interface Receiver {
 

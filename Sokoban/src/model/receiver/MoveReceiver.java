@@ -1,7 +1,9 @@
 package model.receiver;
 
+import common.GeneralReceiver;
 import controller.commands.Direction;
 import model.Model;
+import model.SokobanModel;
 import model.data.gameObjects.GeneralGameObject;
 import model.data.point.GeneralIntegerPoint;
 
@@ -9,13 +11,22 @@ public class MoveReceiver extends GeneralReceiver {
 
 	private Direction direction;
 	private GeneralIntegerPoint playerPoint;
-	private Model model;
+	private SokobanModel model;
+	private boolean moveError;
+
+	public boolean isMoveError() {
+		return moveError;
+	}
+
+	public void setError(boolean moveError) {
+		this.moveError = moveError;
+	}
 
 	public Model getModel() {
 		return model;
 	}
 
-	public void setModel(Model model) {
+	public void setModel(SokobanModel model) {
 		this.model = model;
 	}
 
@@ -33,10 +44,11 @@ public class MoveReceiver extends GeneralReceiver {
 		this.playerPoint=playerPoint;
 	}
 
-	public MoveReceiver(Direction direction, Model model) {
+	public MoveReceiver(Direction direction, SokobanModel model) {
 		this.direction=direction;
 		this.model = model;
 		this.playerPoint=model.getLevel().getPlayerLocation();
+		this.moveError=false;
 	}
 
 	public GeneralIntegerPoint getDestinationPoint()
@@ -63,7 +75,7 @@ public class MoveReceiver extends GeneralReceiver {
 		if(checkMove(sourceObject,destObject,boxNewDestObject) == true)
 			model.getLevel().updateLevel(sourceObject,destObject,boxNewDestObject);
 		else
-			System.out.println("Error: Cannot move "+this.direction.toString());
+			this.moveError=true;
 	}
 
 	public Direction getDirection() {

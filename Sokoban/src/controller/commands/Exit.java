@@ -19,6 +19,6 @@ public class Exit extends GeneralCommand {
 			view.displayError("Exit command does not require any arguments.");
 			return;
 		}
-		this.model.exit("Exiting");
+		this.view.exit("Exiting");
 	}
 }

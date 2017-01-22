@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.util.Observable;
 
 import model.data.level.Level;
-import model.receiver.DisplayReceiver;
+import view.receiver.DisplayReceiver;
+import view.receiver.ExitReciever;
 
 public class CLI extends Observable implements View,Serializable{
 	
@@ -82,11 +83,19 @@ public class CLI extends Observable implements View,Serializable{
 	public void displayLevel(Level level) {
 		DisplayReceiver dr = new DisplayReceiver(level);
 		dr.action();
+		out.println(dr.getLevelString());
+		out.flush();
 	}
 
 	@Override
 	public void displayMessage(String msg) {
 		out.println(msg);
 		out.flush();
+	}
+	
+	@Override
+	public void exit(String exitString) {
+		ExitReciever er = new ExitReciever(exitString, out);
+		er.action();
 	}
 }

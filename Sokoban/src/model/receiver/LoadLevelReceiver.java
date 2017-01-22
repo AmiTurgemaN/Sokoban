@@ -2,6 +2,7 @@ package model.receiver;
 
 import java.io.InputStream;
 
+import common.GeneralReceiver;
 import model.data.level.GeneralLevelLoader;
 import model.data.level.Level;
 

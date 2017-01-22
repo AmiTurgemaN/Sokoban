@@ -1,4 +1,4 @@
-package model.receiver;
+package common;
 
 public abstract class GeneralReceiver implements Receiver {
 

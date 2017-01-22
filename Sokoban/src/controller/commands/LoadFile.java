@@ -114,5 +114,10 @@ public class LoadFile extends GeneralCommand {
 		this.model.getLevel().init2DLevel();
 		if(this.model.getLevel().getLevelString()!="")
 			view.displayMessage("Level "+model.getLevel().getLevelName()+" has been loaded from "+Utilities.getExtension(fileName)+" file");
+		if(this.model.getLevel().checkLevelCompleted())
+		{
+			view.displayLevel(this.model.getLevel());
+			view.displayMessage("Level completed!");
+		}
 	}
 }

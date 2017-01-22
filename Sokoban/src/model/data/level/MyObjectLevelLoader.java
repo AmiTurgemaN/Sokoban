@@ -18,7 +18,6 @@ public class MyObjectLevelLoader extends GeneralLevelLoader {
 	         i.printStackTrace();
 	         return null;
 	      }catch(ClassNotFoundException c) {
-	         System.out.println("Level class not found");
 	         c.printStackTrace();
 	         return null;
 	      }

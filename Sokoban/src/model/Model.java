@@ -11,8 +11,7 @@ import model.data.level.Level;
 public interface Model {
 	Level getLevel();
 	void setLevel(Level level);
-	void move(Direction direction);
+	boolean move(Direction direction);
 	void saveLevel(GeneralLevelSaver generalLevelSaver, OutputStream outputStream);
 	void loadLevel(GeneralLevelLoader generalLevelLoader, InputStream inputStream);
-	void exit(String exitString);
 }

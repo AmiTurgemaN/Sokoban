@@ -9,7 +9,6 @@ import controller.commands.Direction;
 import model.data.level.GeneralLevelLoader;
 import model.data.level.GeneralLevelSaver;
 import model.data.level.Level;
-import model.receiver.ExitReceiver;
 import model.receiver.LoadLevelReceiver;
 import model.receiver.MoveReceiver;
 import model.receiver.SaveLevelReceiver;
@@ -31,9 +30,12 @@ public class SokobanModel extends Observable implements Model,Serializable {
 		return this.level;
 	}
 	@Override
-	public void move(Direction direction) {
-		MoveReceiver cm = new MoveReceiver(direction, this);
-		cm.action();
+	public boolean move(Direction direction) {
+		MoveReceiver mr = new MoveReceiver(direction, this);
+		mr.action();
+		if(mr.isMoveError())
+			return false;
+		return true;
 	}
 
 	@Override
@@ -52,12 +54,6 @@ public class SokobanModel extends Observable implements Model,Serializable {
 		LoadLevelReceiver llr = new LoadLevelReceiver(generalLevelLoader, inputStream);
 		llr.action();
 		setLevel(llr.getLevel());
-	}
-
-	@Override
-	public void exit(String exitString) {
-		ExitReceiver er = new ExitReceiver(exitString);
-		er.action();
 	}
 
 }
