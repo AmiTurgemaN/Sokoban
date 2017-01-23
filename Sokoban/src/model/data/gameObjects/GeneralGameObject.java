@@ -8,7 +8,14 @@ public abstract class GeneralGameObject implements Serializable, gameObject {
 
 	private static final long serialVersionUID = 1L;
 	protected GeneralIntegerPoint point;
+	protected boolean onArea;
 	
+	public boolean isOnArea() {
+		return onArea;
+	}
+	public void setOnArea(boolean onArea) {
+		this.onArea = onArea;
+	}
 	public GeneralIntegerPoint getPoint() {
 		return point;
 	}
@@ -20,9 +27,12 @@ public abstract class GeneralGameObject implements Serializable, gameObject {
 	public GeneralGameObject(GeneralIntegerPoint point) {
 		super();
 		this.point = point;
+		this.onArea=false;
 	}
 	public GeneralGameObject() {
 		super();
+		this.onArea=false;
 	}
 	public abstract char getSymbol();
+	
 }

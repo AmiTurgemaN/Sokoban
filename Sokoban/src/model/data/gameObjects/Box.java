@@ -13,7 +13,7 @@ public class Box extends GeneralGameObject {
 	
 	public Box(GeneralIntegerPoint point)
 	{
-		super(point);
+		
 	}
 
 	@Override
@@ -22,6 +22,8 @@ public class Box extends GeneralGameObject {
 	}
 	
 	public char getSymbol() {
+		if(this.onArea==true)
+			return '$';
 		return '@';
 	}
 }

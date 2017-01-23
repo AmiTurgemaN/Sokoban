@@ -5,6 +5,7 @@ import controller.commands.Direction;
 import model.Model;
 import model.SokobanModel;
 import model.data.gameObjects.GeneralGameObject;
+import model.data.gameObjects.objectType;
 import model.data.point.GeneralIntegerPoint;
 
 public class MoveReceiver extends GeneralReceiver {
@@ -69,7 +70,11 @@ public class MoveReceiver extends GeneralReceiver {
 		sourceObject.setPoint(playerPoint);
 		GeneralGameObject destObject = model.getLevel().getObjectByPoint(destPoint);
 		destObject.setPoint(getDestinationPoint());
-		GeneralGameObject boxNewDestObject = model.getLevel().getObjectByPoint(newDestPoint);
+		GeneralGameObject boxNewDestObject;
+		if(destObject.getType()==objectType.WALL)
+			boxNewDestObject = null;
+		else
+			boxNewDestObject = model.getLevel().getObjectByPoint(newDestPoint);
 		if(boxNewDestObject!=null)
 			boxNewDestObject.setPoint(getBoxNewDestinationPoint());
 		if(checkMove(sourceObject,destObject,boxNewDestObject) == true)
@@ -91,20 +96,16 @@ public class MoveReceiver extends GeneralReceiver {
 		switch(dest.getType())
 		{
 		case BOX:
-		case BOXEDAREA:
 			switch(newDest.getType())
 			{
 			case BOX:
 			case PLAYER:
-			case AREAPLAYER:
-			case BOXEDAREA:
 			case WALL:
 				return model.getLevel().getPolicy().pushBlockedBox();
 			default:
 				return true;
 			}
 		case PLAYER:
-		case AREAPLAYER:
 			return false;
 		case WALL:
 			return model.getLevel().getPolicy().WalkThroughWall();

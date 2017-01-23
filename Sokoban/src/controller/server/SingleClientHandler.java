@@ -1,7 +1,14 @@
 package controller.server;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+
+import controller.SokobanController;
+import model.SokobanModel;
+import view.CLI;
 
 public class SingleClientHandler implements ClientHandler {
 
@@ -31,7 +38,17 @@ public class SingleClientHandler implements ClientHandler {
 
 	@Override
 	public void handleClinet(InputStream inFromClient, OutputStream outToClient) {
+		SokobanModel model = new SokobanModel();
 		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inFromClient));
+		PrintWriter writer = new PrintWriter(outToClient);
+		CLI view = new CLI(reader, writer, "exit");
+		
+		SokobanController controller = new SokobanController(model, view);
+		model.addObserver(controller);
+		view.addObserver(controller);
+		
+		view.start();
 	}
 
 }

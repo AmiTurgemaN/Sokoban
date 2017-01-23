@@ -1,16 +1,15 @@
 package model.data.level;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 import model.data.gameObjects.Area;
-import model.data.gameObjects.AreaPlayer;
 import model.data.gameObjects.Box;
-import model.data.gameObjects.BoxedArea;
 import model.data.gameObjects.GeneralGameObject;
 import model.data.gameObjects.Player;
 import model.data.gameObjects.Space;
 import model.data.gameObjects.Wall;
+import model.data.gameObjects.objectType;
 import model.data.point.GeneralIntegerPoint;
 import model.data.point.Point2D;
 import model.policy.GeneralSokobanPolicy;
@@ -18,76 +17,25 @@ import model.policy.GeneralSokobanPolicy;
 public class Level implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Wall> walls;
-	private ArrayList<Box> boxes;
-	private ArrayList<Area> areas;
-	private ArrayList<Player> players;
-	private ArrayList<Space> spaces;
-	private ArrayList<BoxedArea> boxedAreas;
-	private ArrayList<AreaPlayer> areaPlayers;
+	private GeneralGameObject objectsMatrix[][];
 	private int levelWidth;
 	private int levelHeight;
 	private boolean completed;
 	private String levelString;
 	private String levelName;
 	private GeneralSokobanPolicy policy;
-
-	public Level()
-	{
-		walls = new ArrayList<Wall>();
-		boxes = new ArrayList<Box>();
-		areas = new ArrayList<Area>();
-		players = new ArrayList<Player>();
-		spaces = new ArrayList<Space>();
-		boxedAreas = new ArrayList<BoxedArea>();
-		areaPlayers = new ArrayList<AreaPlayer>();
-		this.levelHeight=0;
-		this.levelWidth=0;
-		this.levelName="";
-		this.levelString="";
-		this.completed=false;
-		this.policy=null;
-	}
-
-	public ArrayList<Wall> getWalls() {
-		return walls;
-	}
-
-	public void setWalls(ArrayList<Wall> walls) {
-		this.walls = walls;
-	}
-
-	public ArrayList<Box> getBoxes() {
-		return boxes;
-	}
-
-	public void setBoxes(ArrayList<Box> boxes) {
-		this.boxes = boxes;
-	}
-
-	public ArrayList<Area> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(ArrayList<Area> areas) {
-		this.areas = areas;
-	}
-
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
 	
+	public Level(){
+		
+	}
+
 	public GeneralIntegerPoint getPlayerLocation()
 	{
-		if(!this.areaPlayers.isEmpty())
-			return this.areaPlayers.get(0).getPoint();
-		if(!this.players.isEmpty())
-			return this.players.get(0).getPoint();
+		for(int i=0;i<levelHeight;i++)
+			for(int j=0;j<levelWidth;j++)
+				if(objectsMatrix[j][i].getSymbol()=='A' || objectsMatrix[j][i].getSymbol()=='B')
+					return objectsMatrix[j][i].getPoint();
 		return null;
-	}
-
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
 	}
 
 	public void setLevelWidth(int levelWidth) {
@@ -101,13 +49,6 @@ public class Level implements Serializable{
 	public Level(GeneralSokobanPolicy policy)
 	{
 		this.policy=policy;
-		walls = new ArrayList<Wall>();
-		boxes = new ArrayList<Box>();
-		areas = new ArrayList<Area>();
-		players = new ArrayList<Player>();
-		spaces = new ArrayList<Space>();
-		boxedAreas = new ArrayList<BoxedArea>();
-		areaPlayers = new ArrayList<AreaPlayer>();
 		this.levelWidth=0;
 		this.levelHeight=0;
 		this.completed=false;
@@ -117,46 +58,23 @@ public class Level implements Serializable{
 
 	private void initLevel()
 	{
-		walls = new ArrayList<Wall>();
-		boxes = new ArrayList<Box>();
-		areas = new ArrayList<Area>();
-		players = new ArrayList<Player>();
-		spaces = new ArrayList<Space>();
-		boxedAreas = new ArrayList<BoxedArea>();
-		areaPlayers = new ArrayList<AreaPlayer>();
 		this.levelWidth=0;
 		this.levelHeight=0;
 		this.completed=false;
-		this.levelString="";
 		this.levelName="";
+		this.policy=null;
+	}
+
+	public GeneralGameObject[][] getObjectsMatrix() {
+		return objectsMatrix;
+	}
+
+	public void setObjectsMatrix(GeneralGameObject[][] objectsMatrix) {
+		this.objectsMatrix = objectsMatrix;
 	}
 
 	public boolean isCompleted() {
 		return completed;
-	}
-
-	public ArrayList<Space> getSpaces() {
-		return spaces;
-	}
-
-	public void setSpaces(ArrayList<Space> spaces) {
-		this.spaces = spaces;
-	}
-
-	public ArrayList<BoxedArea> getBoxedAreas() {
-		return boxedAreas;
-	}
-
-	public void setBoxedAreas(ArrayList<BoxedArea> boxedAreas) {
-		this.boxedAreas = boxedAreas;
-	}
-
-	public ArrayList<AreaPlayer> getAreaPlayers() {
-		return areaPlayers;
-	}
-
-	public void setAreaPlayers(ArrayList<AreaPlayer> areaPlayers) {
-		this.areaPlayers = areaPlayers;
 	}
 
 	public void setCompleted(boolean completed) {
@@ -166,6 +84,8 @@ public class Level implements Serializable{
 	public Level(String level)	
 	{
 		this.levelString=level;
+		initLevel();
+		init2DLevel();
 	}
 
 	public String getLevelName() {
@@ -203,198 +123,54 @@ public class Level implements Serializable{
 		return this.levelHeight;
 	}
 
-	public GeneralGameObject getObjectByPoint(GeneralIntegerPoint point)
-	{
-		for(int i=0;i<walls.size();i++)
-			if(walls.get(i).getPoint().compareTo(point)==0)
-				return new Wall();
-		for(int i=0;i<boxes.size();i++)
-			if(boxes.get(i).getPoint().compareTo(point)==0)
-				return new Box();
-		for(int i=0;i<players.size();i++)
-			if(players.get(i).getPoint().compareTo(point)==0)
-				return new Player();
-		for(int i=0;i<boxedAreas.size();i++)
-			if(boxedAreas.get(i).getPoint().compareTo(point)==0)
-				return new BoxedArea();
-		for(int i=0;i<areas.size();i++)
-			if(areas.get(i).getPoint().compareTo(point)==0)
-				return new Area();
-		for(int i=0;i<spaces.size();i++)
-			if(spaces.get(i).getPoint().compareTo(point)==0)
-				return new Space();
-		for(int i=0;i<areaPlayers.size();i++)
-			if(areaPlayers.get(i).getPoint().compareTo(point)==0)
-				return new AreaPlayer();
-		return null;
-	}
-
 	public void updateLevel(GeneralGameObject source, GeneralGameObject dest,
 			GeneralGameObject newDest) {
-
-		String [] levelRows = levelString.split("\n");
+		int xSource = source.getPoint().getX();
+		int ySource = source.getPoint().getY();
+		int xDest = dest.getPoint().getX();
+		int yDest = dest.getPoint().getY();
+		int xNewDest = newDest.getPoint().getX();
+		int yNewDest = newDest.getPoint().getY();
 		String newLevelString="";
-
-		switch(source.getType())
+		if(!source.isOnArea())
+			this.objectsMatrix[xSource][ySource]=new Space(new Point2D(xSource,ySource));
+		else
+			this.objectsMatrix[xSource][ySource]=new Area(new Point2D(xSource,ySource));
+		this.objectsMatrix[xDest][yDest]=new Player(new Point2D(xDest,yDest));
+		if(dest.getType()==objectType.BOX)
 		{
-		case AREAPLAYER:
-			for(int i=0;i<areaPlayers.size();i++)
-				if(areaPlayers.get(i).getPoint().getX() == source.getPoint().getX() &&
-				areaPlayers.get(i).getPoint().getY() == source.getPoint().getY())
-					areaPlayers.remove(i);
-			areas.add(new Area(source.getPoint()));
-			break;
-		case PLAYER:
-			for(int i=0;i<players.size();i++)
-				if(players.get(i).getPoint().getX() == source.getPoint().getX() &&
-				players.get(i).getPoint().getY() == source.getPoint().getY())
-					players.remove(i);
-			spaces.add(new Space(source.getPoint()));
-			break;
-		default:
-			break;
+			if(dest.isOnArea())
+				this.objectsMatrix[xDest][yDest].setOnArea(true);
+			this.objectsMatrix[xNewDest][yNewDest]=new Box(new Point2D(xNewDest,yNewDest));
+			if(newDest.getType()==objectType.AREA)
+				this.objectsMatrix[xNewDest][yNewDest].setOnArea(true);
 		}
-		switch(dest.getType())
+		else if(dest.getType()==objectType.AREA)
+			this.objectsMatrix[xDest][yDest].setOnArea(true);
+		for(int i=0;i<levelHeight;i++)
 		{
-		case BOX:
-			for(int i=0;i<boxes.size();i++)
-				if(boxes.get(i).getPoint().getX() == dest.getPoint().getX() &&
-				boxes.get(i).getPoint().getY() == dest.getPoint().getY())
-					boxes.remove(i);
-			players.add(new Player(dest.getPoint()));
-			switch(newDest.getType())
+			for(int j=0;j<levelWidth;j++)
 			{
-			case AREA:
-				for(int i=0;i<areas.size();i++)
-					if(areas.get(i).getPoint().getX() == newDest.getPoint().getX() &&
-					areas.get(i).getPoint().getY() == newDest.getPoint().getY())
-						areas.remove(i);
-				boxedAreas.add(new BoxedArea(newDest.getPoint()));
-				break;
-			case SPACE:
-				for(int i=0;i<spaces.size();i++)
-					if(spaces.get(i).getPoint().getX() == newDest.getPoint().getX() &&
-					spaces.get(i).getPoint().getY() == newDest.getPoint().getY())
-						spaces.remove(i);
-				boxes.add(new Box(newDest.getPoint()));
-			default:
-				break;
-			}
-			break;
-		case BOXEDAREA:
-			for(int i=0;i<boxedAreas.size();i++)
-				if(boxedAreas.get(i).getPoint().getX() == dest.getPoint().getX() &&
-				boxedAreas.get(i).getPoint().getY() == dest.getPoint().getY())
-					boxedAreas.remove(i);
-			areaPlayers.add(new AreaPlayer(dest.getPoint()));
-			switch(newDest.getType())
-			{
-			case AREA:
-				for(int i=0;i<areas.size();i++)
-					if(areas.get(i).getPoint().getX() == newDest.getPoint().getX() &&
-					areas.get(i).getPoint().getY() == newDest.getPoint().getY())
-						areas.remove(i);
-				boxedAreas.add(new BoxedArea(newDest.getPoint()));
-				break;
-			case SPACE:
-				for(int i=0;i<spaces.size();i++)
-					if(spaces.get(i).getPoint().getX() == newDest.getPoint().getX() &&
-					spaces.get(i).getPoint().getY() == newDest.getPoint().getY())
-						spaces.remove(i);
-				boxes.add(new Box(newDest.getPoint()));
-			default:
-				break;
-			}
-			break;
-		case AREA:
-			for(int i=0;i<areas.size();i++)
-				if(areas.get(i).getPoint().getX() == dest.getPoint().getX() &&
-				areas.get(i).getPoint().getY() == dest.getPoint().getY())
-					areas.remove(i);
-			areaPlayers.add(new AreaPlayer(dest.getPoint()));
-			break;
-		case SPACE:
-			for(int i=0;i<spaces.size();i++)
-				if(spaces.get(i).getPoint().getX() == dest.getPoint().getX() &&
-				spaces.get(i).getPoint().getY() == dest.getPoint().getY())
-					spaces.remove(i);
-			players.add(new Player(dest.getPoint()));
-			break;
-		default :
-			break;
-		}
-
-		for(int i=0;i<levelRows.length;i++)
-		{
-			for(int j=0;j<levelRows[i].length();j++)
-			{
-				if(i==source.getPoint().getY() && j==source.getPoint().getX())
-				{
-					GeneralGameObject tempObject = getObjectByPoint(source.getPoint());
-					newLevelString+= tempObject.getSymbol();
-				}
-				else if(i==dest.getPoint().getY() && j==dest.getPoint().getX())
-				{
-					GeneralGameObject tempObject = getObjectByPoint(dest.getPoint());
-					newLevelString+= tempObject.getSymbol();
-				}
-				else if(i==newDest.getPoint().getY() && j==newDest.getPoint().getX())
-				{
-					GeneralGameObject tempObject = getObjectByPoint(newDest.getPoint());
-					newLevelString+= tempObject.getSymbol();
-				}
-				else
-				{
-					newLevelString+=levelRows[i].charAt(j);
-				}
+				newLevelString+=objectsMatrix[j][i].getSymbol();
 			}
 			newLevelString+="\n";
-
 		}
 		this.levelString = newLevelString;
 		checkLevelCompleted();
 	}
 
 	public boolean checkLevelCompleted() {
-		if(this.areaPlayers.isEmpty() && this.areas.isEmpty() && this.boxes.isEmpty())
-		{
-			this.completed=true;
-			return true;
-		}
-		return false;
+		for(int i=0;i<levelHeight;i++)
+			for(int j=0;j<levelWidth;j++)
+				if(objectsMatrix[j][i].getType()==objectType.BOX && !objectsMatrix[j][i].isOnArea())
+					return false;
+		this.completed=true;
+		return true;
 	}
 
 	public void init2DLevel()
 	{
-		int tempCols=0;
-		int rows=1;
-		int cols=0;
-		for(int i=0;i<this.levelString.length();i++)
-		{
-			if(this.levelString.charAt(i)=='\r')
-			{
-				rows++;
-				if(tempCols>cols)
-				{
-					cols=tempCols;
-				}
-				tempCols=0;
-
-			}
-			else
-				tempCols++;
-		}
-		cols--;
-
-		this.levelWidth=cols;
-		this.levelHeight=rows;
-		this.walls = new ArrayList<Wall>();
-		this.areas = new ArrayList<Area>();
-		this.boxes = new ArrayList<Box>();
-		this.players = new ArrayList<Player>();
-		this.spaces = new ArrayList<Space>();
-		this.boxedAreas = new ArrayList<BoxedArea>();
-		this.areaPlayers = new ArrayList<AreaPlayer>();
+		updateLevelDimensions();
 
 		String [] levelRows = levelString.split("\r\n");
 		for(int i=0;i<levelRows.length;i++)
@@ -402,25 +178,27 @@ public class Level implements Serializable{
 				switch(levelRows[i].charAt(j))
 				{
 				case '#':
-					this.walls.add(new Wall(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Wall(new Point2D(j,i));
 					break;
 				case 'o':
-					this.areas.add(new Area(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Area(new Point2D(j,i));
 					break;
 				case '$':
-					this.boxedAreas.add(new BoxedArea(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Box(new Point2D(j,i));
+					this.objectsMatrix[j][i].setOnArea(true);
 					break;
 				case 'B':
-					this.areaPlayers.add(new AreaPlayer(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Player(new Point2D(j,i));
+					this.objectsMatrix[j][i].setOnArea(true);
 					break;
 				case '@':
-					this.boxes.add(new Box(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Box(new Point2D(j,i));
 					break;
 				case 'A':
-					this.players.add(new Player(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Player(new Point2D(j,i));
 					break;
 				case ' ' :
-					this.spaces.add(new Space(new Point2D(j,i)));
+					this.objectsMatrix[j][i]=new Space(new Point2D(j,i));
 					break;
 				case '\r':
 				case '\n':
@@ -430,6 +208,71 @@ public class Level implements Serializable{
 					initLevel();
 					return;
 				}
+
+		for(int i=0;i<levelHeight;i++)
+			for(int j=0;j<levelWidth;j++)
+				if(i>=levelRows.length || j>=levelRows[i].length())
+					this.objectsMatrix[j][i]=new Space(new Point2D(j,i));
+	}
+
+	public boolean checkLevelValidation() {
+		int boxes=0,areas=0,player=0;
+		for(int i=0;i<levelHeight;i++)
+			for(int j=0;j<levelWidth;j++)
+				switch (objectsMatrix[j][i].getSymbol()) {
+				case '$':
+					boxes++;
+					areas++;
+					break;
+				case '@':
+					boxes++;
+					break;
+				case 'B':
+					areas++;
+					player++;
+					break;
+				case 'o':
+					areas++;
+					break;
+				case 'A':
+					player++;
+				default:
+					break;
+				}
+		if(boxes!=areas || player!=1)
+			return false;
+		return true;
+	}
+
+	private void updateLevelDimensions() {
+		int tempCols=0;
+		int rows=1;
+		int cols=1;
+		for(int i=0;i<this.levelString.length();i++)
+		{
+			if(this.levelString.charAt(i)=='\n')
+			{
+				rows++;
+				if(--tempCols>cols)
+				{
+					cols=tempCols;
+				}
+				tempCols=0;
+			}
+			else
+				tempCols++;
+		}
+		if(tempCols>cols)
+		{
+			cols=tempCols;
+		}
+		this.levelWidth=cols;
+		this.levelHeight=rows;
+		this.objectsMatrix=new GeneralGameObject[levelWidth][levelHeight];
+	}
+
+	public GeneralGameObject getObjectByPoint(GeneralIntegerPoint point) {
+		return objectsMatrix[point.getX()][point.getY()];
 	}
 
 }

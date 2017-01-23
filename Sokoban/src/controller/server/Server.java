@@ -4,22 +4,23 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Observable;
 
-public class Server {
+public class Server extends Observable{
 	private int port;
 	private ClientHandler ch;
 	private volatile boolean stop;
-	
+
 	public Server(int port,ClientHandler ch) {
 		this.port=port;
 		this.ch=ch;
 		this.stop=false;
 	}
-	
+
 	public void start()
 	{
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try{
@@ -40,20 +41,14 @@ public class Server {
 			try
 			{
 				Socket aClient=server.accept();
-				new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						try {
-							ch.handleClinet(aClient.getInputStream(), aClient.getOutputStream());
-							aClient.getInputStream().close();
-							aClient.getOutputStream().close();
-							aClient.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}).start();
+				try {
+					ch.handleClinet(aClient.getInputStream(), aClient.getOutputStream());
+					aClient.getInputStream().close();
+					aClient.getOutputStream().close();
+					aClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			catch(SocketTimeoutException e)
 			{
@@ -62,9 +57,9 @@ public class Server {
 		}
 		server.close();
 	}
-	
+
 	public void stop()
 	{
-		stop=true;
+		this.stop=true;
 	}
 }

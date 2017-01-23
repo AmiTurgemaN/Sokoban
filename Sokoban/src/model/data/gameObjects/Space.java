@@ -25,4 +25,5 @@ public class Space extends GeneralGameObject {
 	public char getSymbol() {
 		return ' ';
 	}
+
 }

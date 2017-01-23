@@ -101,10 +101,16 @@ public class LoadFile extends GeneralCommand {
 
 	public void setLevel() {
 		this.model.getLevel().setPolicy(new MySokobanPolicy());
-		model.setLevel(this.model.getLevel());
-		this.model.getLevel().setLevelName(fileName.replaceAll("."+Utilities.getExtension(fileName), ""));
-		this.model.getLevel().init2DLevel();
-		if(this.model.getLevel().getLevelString()!="")
+		this.model.setLevel(this.model.getLevel());
+		if(this.model.getLevel().getLevelName()!=null)
+			this.model.getLevel().setLevelName(fileName.replaceAll("."+Utilities.getExtension(fileName), ""));
+		if(!this.model.getLevel().checkLevelValidation())
+		{
+			view.displayError("Level is not valid");
+			model.setLevel(null);
+			return;
+		}
+		if(this.model.getLevel().getLevelName()!="")
 			view.displayMessage("Level "+model.getLevel().getLevelName()+" has been loaded from "+Utilities.getExtension(fileName)+" file");
 		if(this.model.getLevel().checkLevelCompleted())
 		{

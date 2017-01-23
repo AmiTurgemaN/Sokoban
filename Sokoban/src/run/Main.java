@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import controller.SokobanController;
+import controller.server.Server;
+import controller.server.SingleClientHandler;
 import model.SokobanModel;
 import view.CLI;
 
@@ -23,6 +25,10 @@ public class Main {
 		view.addObserver(controller);
 		
 		view.start();
+		
+		/*Server server = new Server(1234, new SingleClientHandler(System.in, System.out));
+		server.start();
+		server.stop();*/
 	}
 
 }

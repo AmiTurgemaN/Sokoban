@@ -23,6 +23,8 @@ public class Player extends GeneralGameObject {
 	
 	@Override
 	public char getSymbol() {
+		if(this.onArea==true)
+			return 'B';
 		return 'A';
 	}
 	
