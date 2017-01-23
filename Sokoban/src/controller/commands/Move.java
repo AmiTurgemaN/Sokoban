@@ -26,14 +26,6 @@ public class Move extends GeneralCommand {
 		this.direction = direction;
 	}
 
-	public Model getModel() {
-		return model;
-	}
-
-	public void setModel(Model model) {
-		this.model = model;
-	}
-
 	@Override
 	public void execute() {
 		if(this.commandArgs==null)

@@ -6,15 +6,6 @@ import view.View;
 
 public class Display extends GeneralCommand {
 	private static final long serialVersionUID = 1L;
-	private Model model;
-	
-	public Model getModel() {
-		return model;
-	}
-
-	public void setModel(Model model) {
-		this.model = model;
-	}
 
 	public Display(Model model) {
 		this.model=model;

@@ -20,14 +20,6 @@ public class LoadFile extends GeneralCommand {
 	private LevelCreator lc;
 	private String fileName;
 
-	public Model getModel() {
-		return model;
-	}
-
-	public void setModel(Model model) {
-		this.model = model;
-	}
-
 	public LoadFile(GeneralLevelLoader generalLevelLoader,InputStream inputStream,Model model)
 	{
 		this.generalLevelLoader=generalLevelLoader;

@@ -19,14 +19,6 @@ public class SaveFile extends GeneralCommand {
 	private GeneralLevelSaver generalLevelSaver;
 	private OutputStream outputStream;
 	private LevelCreator lc;
-	
-	public Model getModel() {
-		return model;
-	}
-
-	public void setModel(Model model) {
-		this.model = model;
-	}
 
 	public LevelCreator getLc() {
 		return lc;
